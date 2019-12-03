@@ -58,7 +58,7 @@ cables[0].split(',').forEach(cable => {
 });
 
 const intersections = [];
-cables[0].split(',').forEach(cable => {
+cables[1].split(',').forEach(cable => {
   const nextPosition = getNextPosition(currentPosition, cable);
   const line = { from: currentPosition, to: nextPosition };
   const newIntersections = doesIntercept(lines, line);
