@@ -1,3 +1,5 @@
+console.time('main');
+
 function getNextPosition(currentPosition, cable) {
   const direction = cable.substring(0, 1);
   const value = parseInt(cable.substring(1));
@@ -74,4 +76,5 @@ intersections.forEach((intersection) => {
   }
 });
 
+console.timeEnd('main');
 console.log(minDistance);
