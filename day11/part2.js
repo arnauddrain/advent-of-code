@@ -144,9 +144,9 @@ while (output !== -1) {
   }
 }
 
-for (var y = 0; y <= (maxY - minY); y++) {
+for (var y = minY; y <= maxY; y++) {
   let line = '';
-  for (var x = 0; x <= (maxX - minX); x++) {
+  for (var x = minX; x <= maxX; x++) {
     if (panels[x + '_' + y] === 1) {
       line += '#';
     } else {
