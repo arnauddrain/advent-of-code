@@ -1,3 +1,5 @@
+export {};
+
 const inputs = (await Deno.readTextFile("./input")).split("\n").map((input) =>
   Number(input)
 );
