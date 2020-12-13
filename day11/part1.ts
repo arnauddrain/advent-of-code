@@ -33,12 +33,12 @@ function countAdjacent(x: number, y: number): number {
 }
 
 function oneRound() {
-  let newSeats: string[][] = [];
+  const newSeats: string[][] = [];
   for (let y = 0; y < height; y++) {
     newSeats.push([]);
     for (let x = 0; x < width; x++) {
       if (seats[y][x] !== '.') {
-        let occupied = countAdjacent(x, y);
+        const occupied = countAdjacent(x, y);
         if (occupied === 0) {
           newSeats[y][x] = '#';
         } else if (occupied >= 4) {
