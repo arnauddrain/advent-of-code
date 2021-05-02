@@ -1,9 +1,0 @@
-{
-  "editor.formatOnSave": true,
-  "deno.enable": true,
-  "[typescript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-  },
-  "deno.lint": true,
-  "deno.unstable": true
-}
