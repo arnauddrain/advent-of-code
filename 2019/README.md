@@ -4,5 +4,5 @@ To run any part with Node, run:
 
 ```sh
 $ cd dayXX
-$ node partX.ts
+$ node partX.js
 ```
