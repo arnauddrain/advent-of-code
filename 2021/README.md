@@ -1,4 +1,4 @@
-My solutions in TypeScript for the Advent of Code 2020.
+My solutions in TypeScript for the Advent of Code 2021.
 
 To run any part with Deno, run:
 
