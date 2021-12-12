@@ -20,14 +20,14 @@ function hasSmallCavesDuplicates(paths: string[]): boolean {
 
 function getPaths(
   paths: { [key: string]: string[] },
-  currentPath: string[]
-): string[] {
-  const currentPosition = currentPath[currentPath.length - 1];
+  currentPath: string[],
+  currentPosition: string
+): number {
   if (currentPosition === 'end') {
-    return [currentPath.join(',')];
+    return 1;
   }
-  const duplicates = hasSmallCavesDuplicates(currentPath);
-  return (paths[currentPath[currentPath.length - 1]] || []).reduce<string[]>(
+  const duplicates = hasSmallCavesDuplicates(currentPath); // such opti
+  return (paths[currentPath[currentPath.length - 1]] || []).reduce(
     (acc, position) => {
       if (
         position !== 'start' &&
@@ -35,15 +35,15 @@ function getPaths(
           !currentPath.includes(position) ||
           !duplicates)
       ) {
-        return [...acc, ...getPaths(paths, [...currentPath, position])];
+        return acc + getPaths(paths, [...currentPath, position], position);
       } else {
         return acc;
       }
     },
-    []
+    0
   );
 }
 
 console.log(
-  getPaths(parsePaths(await Deno.readTextFile('./input')), ['start']).length
+  getPaths(parsePaths(await Deno.readTextFile('./input')), ['start'], 'start')
 );
