@@ -1,39 +1,66 @@
 export {};
 
+interface Rule {
+  current: number;
+  from: string;
+  produce: string;
+}
+
 const file = await Deno.readTextFile('./input');
 const parts = file.trim().split('\n\n');
 let str = parts[0];
-const rules = parts[1]
-  .split('\n')
-  .reduce<{ [key: string]: string }>((acc, line) => {
-    const parts = line.split(' -> ');
-    return { ...acc, [parts[0]]: parts[1] };
-  }, {});
+let rules = parts[1].split('\n').map<Rule>((line) => {
+  const parts = line.split(' -> ');
+  return { current: 0, from: parts[0], produce: parts[1] };
+});
+
+for (let index = 0; index < str.length - 1; index++) {
+  const pair = str.slice(index, index + 2);
+  const rule = rules.find((r) => r.from === pair);
+  if (rule) {
+    rule.current++;
+  }
+}
+
+console.log(rules);
 
 for (let i = 0; i < 40; i++) {
-  console.log(i);
-  let tmpStr = str[0];
-  for (let index = 0; index < str.length - 1; index++) {
-    const pair = str.slice(index, index + 2);
-    if (rules[pair]) {
-      tmpStr += rules[pair];
-    } else {
-      console.log('oh');
+  const newRules = rules.map<Rule>((rule) => ({
+    current: 0,
+    from: rule.from,
+    produce: rule.produce,
+  }));
+  rules.forEach((rule) => {
+    const firstRule = newRules.find(
+      (r) => r.from === rule.from[0] + rule.produce
+    );
+    const secondRule = newRules.find(
+      (r) => r.from === rule.produce + rule.from[1]
+    );
+    if (firstRule) {
+      firstRule.current += rule.current;
     }
-    tmpStr += str[index + 1];
-  }
-  str = tmpStr;
+    if (secondRule) {
+      secondRule.current += rule.current;
+    }
+  });
+  rules = newRules;
 }
 
+console.log(rules);
+
 const occurrences: { [key: string]: number } = {};
-for (let i = 0; i < str.length; i++) {
-  const char = str[i];
+occurrences[str[0]] = 1;
+rules.forEach((rule) => {
+  const char = rule.from[1];
   if (occurrences[char]) {
-    occurrences[char]++;
+    occurrences[char] += rule.current;
   } else {
-    occurrences[char] = 1;
+    occurrences[char] = rule.current;
   }
-}
+});
+
+console.log(occurrences);
 
 const min = Object.entries(occurrences).reduce<[string, number]>(
   (min, entry) => (min[0] === '' || entry[1] < min[1] ? entry : min),
