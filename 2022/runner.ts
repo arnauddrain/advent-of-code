@@ -2,8 +2,9 @@ import fs from 'fs';
 
 import Day01 from './day01/script';
 import Day02 from './day02/script';
+import Day03 from './day03/script';
 
-const days = [Day01, Day02];
+const days = [Day01, Day02, Day03];
 
 function displayUsageAndQuit() {
   console.log(
