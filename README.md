@@ -1,4 +1,4 @@
-My solutions the Advent of Code.
+My solutions for [the Advent of Code](https://adventofcode.com/).
 
 - [2019](2019) (JavaScript)
 - [2020](2020) (Typescript)
